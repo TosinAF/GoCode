@@ -7,6 +7,7 @@
 //
 
 #import "CGAppDelegate.h"
+#import "CGConsoleViewController.h"
 
 @implementation CGAppDelegate
 
@@ -15,6 +16,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    CGConsoleViewController *consoleViewController = [[CGConsoleViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:consoleViewController];
     [self.window makeKeyAndVisible];
     return YES;
 }
