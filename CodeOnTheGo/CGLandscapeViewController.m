@@ -142,7 +142,7 @@ BOOL challenge = NO;
     }
 
 
-    self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 30, screenSize.width, 150)];
+
     self.output = [[UITextView alloc] initWithFrame:CGRectMake(0, 180, screenSize.width, 150)];
     [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
 
