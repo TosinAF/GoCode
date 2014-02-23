@@ -1,5 +1,5 @@
 //
-//  CGConsoleViewController.h
+//  CGLessonViewController.h
 //  CodeOnTheGo
 //
 //  Created by Tosin Afolabi on 22/02/2014.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CGConsoleViewController : UIViewController <UITextViewDelegate>
+@interface CGLessonViewController : UIViewController <UITextViewDelegate>
 
 @end

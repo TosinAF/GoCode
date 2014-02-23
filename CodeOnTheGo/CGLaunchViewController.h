@@ -1,5 +1,5 @@
 //
-//  CGConsoleViewController.h
+//  CGLaunchViewController.h
 //  CodeOnTheGo
 //
 //  Created by Tosin Afolabi on 22/02/2014.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CGConsoleViewController : UIViewController <UITextViewDelegate>
+@interface CGLaunchViewController : UIViewController
 
 @end

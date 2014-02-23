@@ -7,6 +7,9 @@
 //
 
 #import "CGAppDelegate.h"
+#import "CGNavigationController.h"
+#import "CGLessonViewController.h"
+#import "CGLaunchViewController.h"
 #import "CGConsoleViewController.h"
 
 @implementation CGAppDelegate
@@ -16,8 +19,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    CGConsoleViewController *consoleViewController = [[CGConsoleViewController alloc] init];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:consoleViewController];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //CGLaunchViewController *consoleViewController = [[CGLaunchViewController alloc] init];
+    CGLessonViewController *consoleViewController = [[CGLessonViewController alloc] init];
+    self.window.rootViewController = [[CGNavigationController alloc] initWithRootViewController:consoleViewController];
     [self.window makeKeyAndVisible];
     return YES;
 }
