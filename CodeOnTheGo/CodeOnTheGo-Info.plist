@@ -33,6 +33,8 @@
 		<string>SourceSansPro-ExtraLight.otf</string>
 		<string>SourceSansPro-Light.otf</string>
 		<string>SourceSansPro-Regular.otf</string>
+		<string>fontello.ttf</string>
+		<string>HangedLetters.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

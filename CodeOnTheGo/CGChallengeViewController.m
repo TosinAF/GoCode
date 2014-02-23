@@ -1,23 +1,25 @@
 //
-//  CGTableViewController.m
+//  CGChallengeViewController.m
 //  CodeOnTheGo
 //
 //  Created by Tosin Afolabi on 23/02/2014.
 //  Copyright (c) 2014 Tosin Afolabi. All rights reserved.
 //
 
-#import "CGTableViewController.h"
-#import "CGLessonViewController.h"
+#import "CGLandscapeViewController.h"
+#import "CGChallengeViewController.h"
 
 static NSString *cellIdentifier = @"CellIdentifier";
 
-@interface CGTableViewController ()
+@interface CGChallengeViewController ()
 
-@property (nonatomic, strong) NSArray *data;
+@property (nonatomic,strong) NSArray *challenges;
+@property (nonatomic,strong) NSArray *answers;
+@property (nonatomic,strong) NSArray *titles;
 
 @end
 
-@implementation CGTableViewController
+@implementation CGChallengeViewController
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -32,13 +34,17 @@ static NSString *cellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"Pick a Lessson"];
+    [self setTitle:@"Pick a Challenge"];
 
     [self configureNavbarApperance];
 
-    self.data = [[NSArray alloc] initWithObjects:@"Getting Started", @"Data Types", @"Variables", @"Comparisons", @"If.. Else...", nil];
+    self.challenges = [[NSArray alloc] initWithObjects:@"How many prime numbers are within the range of 1-100?", @"Write a function, calculateAge that takes arguments: birth year, current year. Call with arguements, 1994 & 2016", @"Write a fareheneit to celcius converter. Call with -40F.", nil];
+
+    self.titles = [[NSArray alloc] initWithObjects:@"Prime Numbers", @"Calcualte Ages", @"Farehenheit To Celcius", nil];
+
+    self.answers = [[NSArray alloc] initWithObjects:@"25", @"22", @"-40", nil];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
-    
+
 }
 
 - (void)configureNavbarApperance
@@ -66,7 +72,7 @@ static NSString *cellIdentifier = @"CellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.data count];
+    return [self.challenges count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,30 +82,33 @@ static NSString *cellIdentifier = @"CellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGLessonViewController *lessonViewController = [[CGLessonViewController alloc] init];
-    [self.navigationController pushViewController:lessonViewController animated:YES];
+    CGLandscapeViewController *landscapeViewController = [[CGLandscapeViewController alloc] initWithChallenge:[self.challenges objectAtIndex:[indexPath row]] answer:[self.answers objectAtIndex:[indexPath row]]];
+    [self.navigationController pushViewController:landscapeViewController animated:YES];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    
-    [cell.textLabel setText:[self.data objectAtIndex:[indexPath row]]];
 
-    UIProgressView *progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
-    progress.frame = CGRectMake(0, 48, self.view.bounds.size.width, 28);
-    //[progress setProgressTintColor:[UIColor colorWithRed:0.204 green:0.286 blue:0.369 alpha:1]];
+    [cell.textLabel setText:[self.titles objectAtIndex:[indexPath row]]];
 
 
     if ([indexPath row] == 0) {
-        progress.progress = 0.65;
+        [cell.detailTextLabel setText:@"Hard"];
+    }
+
+    if ([indexPath row] == 1) {
+        [cell.detailTextLabel setText:@"Easy"];
+    }
+
+    if ([indexPath row] == 2) {
+        [cell.detailTextLabel setText:@"Medium"];
     }
 
     [cell.textLabel setFont:[UIFont fontWithName:@"Avenir-Medium" size:15.0]];
-
-    [cell.contentView addSubview:progress];
-
+    [cell.detailTextLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:10.0]];
+    
     return cell;
 }
 

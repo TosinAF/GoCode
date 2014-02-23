@@ -11,6 +11,7 @@
 #import "CGLandscapeViewController.h"
 #import "CGTableViewController.h"
 #import "CGLessonViewController.h"
+#import "CGChallengeViewController.h"
 
 @interface CGLaunchViewController ()
 
@@ -63,6 +64,7 @@
     [challengeButton setBackgroundColor:[UIColor colorWithRed:0.941 green:0.698 blue:0.282 alpha:1]];
     [[challengeButton titleLabel] setFont:[UIFont fontWithName:@"Montserrat" size:15.0]];
     [challengeButton setFrame:CGRectMake(50, 310, screenSize.width - 50, 50)];
+    [challengeButton addTarget:self action:@selector(showChallengeView) forControlEvents:UIControlEventTouchUpInside];
 
 
     UIButton *playgroudButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -92,6 +94,12 @@
     [self.view addSubview:playgroudButton];
     [self.view addSubview:inspirationalQuote];
     [self.view addSubview:profileButton];
+}
+
+- (void)showChallengeView
+{
+    CGChallengeViewController *challengeViewController = [[CGChallengeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:challengeViewController animated:YES];
 }
 
 - (BOOL)shouldAutorotate

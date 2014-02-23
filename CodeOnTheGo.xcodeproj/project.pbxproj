@@ -41,6 +41,9 @@
 		4E82123B18B9E7D400BF06DA /* chow2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E82123A18B9E7D400BF06DA /* chow2.jpg */; };
 		4E82124318BA023000BF06DA /* icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82124218BA023000BF06DA /* icons.ttf */; };
 		4E82124618BA134E00BF06DA /* CGFinishedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82124518BA134E00BF06DA /* CGFinishedViewController.m */; };
+		4E82124918BA1BB500BF06DA /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82124718BA1BB500BF06DA /* fontello.ttf */; };
+		4E82124A18BA1BB500BF06DA /* HangedLetters.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82124818BA1BB500BF06DA /* HangedLetters.ttf */; };
+		4E82124D18BA20DF00BF06DA /* CGChallengeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82124C18BA20DF00BF06DA /* CGChallengeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,10 @@
 		4E82124218BA023000BF06DA /* icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.ttf; sourceTree = "<group>"; };
 		4E82124418BA134E00BF06DA /* CGFinishedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGFinishedViewController.h; sourceTree = "<group>"; };
 		4E82124518BA134E00BF06DA /* CGFinishedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGFinishedViewController.m; sourceTree = "<group>"; };
+		4E82124718BA1BB500BF06DA /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
+		4E82124818BA1BB500BF06DA /* HangedLetters.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HangedLetters.ttf; sourceTree = "<group>"; };
+		4E82124B18BA20DF00BF06DA /* CGChallengeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGChallengeViewController.h; sourceTree = "<group>"; };
+		4E82124C18BA20DF00BF06DA /* CGChallengeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGChallengeViewController.m; sourceTree = "<group>"; };
 		589C62681D454AB29DEBD91D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0456C8E0D054616BDF08548 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +185,8 @@
 				4E82110B18B9334C00BF06DA /* CGLessonViewController.m */,
 				4E82122F18B9CA4400BF06DA /* CGLandscapeViewController.h */,
 				4E82123018B9CA4400BF06DA /* CGLandscapeViewController.m */,
+				4E82124B18BA20DF00BF06DA /* CGChallengeViewController.h */,
+				4E82124C18BA20DF00BF06DA /* CGChallengeViewController.m */,
 				4E82124418BA134E00BF06DA /* CGFinishedViewController.h */,
 				4E82124518BA134E00BF06DA /* CGFinishedViewController.m */,
 				4E82123218B9E61D00BF06DA /* CGProfileViewController.h */,
@@ -203,6 +212,8 @@
 		4E8210D418B8F5D100BF06DA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E82124718BA1BB500BF06DA /* fontello.ttf */,
+				4E82124818BA1BB500BF06DA /* HangedLetters.ttf */,
 				4E82124218BA023000BF06DA /* icons.ttf */,
 				4E82123A18B9E7D400BF06DA /* chow2.jpg */,
 				4E82122A18B9A0E400BF06DA /* Syntax.plist */,
@@ -321,6 +332,8 @@
 				4E8210D818B8F5D100BF06DA /* InfoPlist.strings in Resources */,
 				4E82115318B95E9100BF06DA /* Anonymous Pro.ttf in Resources */,
 				4E82122B18B9A0E400BF06DA /* Syntax.plist in Resources */,
+				4E82124A18BA1BB500BF06DA /* HangedLetters.ttf in Resources */,
+				4E82124918BA1BB500BF06DA /* fontello.ttf in Resources */,
 				4E8210E018B8F5D100BF06DA /* Images.xcassets in Resources */,
 				4E82110918B920FC00BF06DA /* Montserrat-Regular.ttf in Resources */,
 				4E82123B18B9E7D400BF06DA /* chow2.jpg in Resources */,
@@ -376,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E82124D18BA20DF00BF06DA /* CGChallengeViewController.m in Sources */,
 				4E82110C18B9334C00BF06DA /* CGLessonViewController.m in Sources */,
 				4E82122918B99DED00BF06DA /* NLTextView.m in Sources */,
 				4E82123418B9E61D00BF06DA /* CGProfileViewController.m in Sources */,

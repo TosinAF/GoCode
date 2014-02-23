@@ -12,6 +12,8 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "CGLandscapeViewController.h"
 
+BOOL challenge = NO;
+
 @interface CGLandscapeViewController ()
 
 @property (nonatomic, strong) UILabel *instructionLabel;
@@ -19,6 +21,9 @@
 @property (nonatomic, strong) UITextView *output;
 @property (nonatomic, strong) JSContext *context;
 @property (nonatomic, strong) NSMutableArray *log;
+
+@property (nonatomic, strong) NSString *challengeStr;
+@property (nonatomic, strong) NSString *answer;
 
 @property (nonatomic, strong) UILabel *changeToLandscapeLabel;
 
@@ -29,6 +34,20 @@
 
 @implementation CGLandscapeViewController
 
+- (id)initWithChallenge:(NSString *)challengeStr answer:(NSString *)answer
+{
+    self = [super init];
+
+    if (self) {
+
+        self.challengeStr = challengeStr;
+        self.answer = answer;
+        challenge = YES;
+
+    }
+
+    return self;
+}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -111,7 +130,18 @@
     CGSize screenSize = CGSizeMake(568, 320);
     [self.view setBackgroundColor:[UIColor whiteColor]];
 
-    self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, 30)];
+    if (challenge) {
+        self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, screenSize.width -20, 60)];
+        [self.instructionLabel setText:self.challengeStr];
+        [self.instructionLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:13.0]];
+        [self.instructionLabel setNumberOfLines:0];
+        [self.instructionLabel setTextColor:[UIColor blackColor]];
+        self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 60, screenSize.width, 150)];
+    } else {
+        self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 30, screenSize.width, 150)];
+    }
+
+
     self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 30, screenSize.width, 150)];
     self.output = [[UITextView alloc] initWithFrame:CGRectMake(0, 180, screenSize.width, 150)];
     [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
@@ -138,20 +168,6 @@
 
     [self setupJSInterpreter];
 
-}
-
-- (void)setupViews
-{
-    //CGSize screenSize = self.view.bounds.size;
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-
-    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-    {
-
-
-    } else {
-
-    }
 }
 
 - (void)configureNavbarApperance
@@ -218,10 +234,17 @@
 
     if ([self.log count]) {
 
-        for (NSString *item in self.log) {
-            [output appendString:item];
-            [output appendString:@"\n"];
-         }
+
+
+        if (challenge && [[self.log firstObject] isEqualToString:self.answer ]) {
+            [output appendString:[self.log firstObject]];
+            [output appendString:@". Congratulations, you solved the challenge You have just gained 15 points."];
+        } else {
+            for (NSString *item in self.log) {
+                [output appendString:item];
+                [output appendString:@"\n"];
+            }
+        }
 
         [self.output setText:output];
         [self.log removeAllObjects];
@@ -237,6 +260,7 @@
     }
     return YES;
 }
+
 
 - (void)canRotate { };
 

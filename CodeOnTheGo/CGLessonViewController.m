@@ -10,6 +10,7 @@ int i = 0;
 
 #import "NLContext.h"
 #import "NLTextView.h"
+#import "CGFinishedViewController.h"
 #import "CSNotificationView.h"
 #import "CGLessonViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
@@ -23,6 +24,7 @@ int i = 0;
 @property (nonatomic, strong) NSMutableArray *log;
 
 @property (nonatomic, strong) UIButton *nextButton;
+@property (nonatomic, strong) UIButton *executeButton;
 
 @property (nonatomic, strong) NSArray *instructions;
 @property (nonatomic, strong) NSArray *preWrittenCode;
@@ -107,8 +109,21 @@ int i = 0;
     UIView *underlay = [[UIView alloc] initWithFrame:CGRectMake(0, 352, screenSize.width, 216)];
     [underlay setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
 
+    self.executeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.executeButton setTitle:@"Run" forState:UIControlStateNormal];
+    [self.executeButton.titleLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:15]];
+    [self.executeButton setBackgroundColor:[UIColor colorWithRed:0.180 green:0.800 blue:0.443 alpha:1]];
+    [self.executeButton setFrame:CGRectMake(240, 115, 70, 35)];
+    [self.executeButton addTarget:self action:@selector(executeJS) forControlEvents:UIControlEventTouchUpInside];
+
+    NSDictionary *titleAttributes = @{ NSFontAttributeName:[UIFont fontWithName:@"Avenir-Light" size:18.0f],
+                                       NSForegroundColorAttributeName:[UIColor whiteColor] };
+    [[UIBarButtonItem appearance] setTitleTextAttributes:titleAttributes forState:UIControlStateNormal];
+
+
     [self.view addSubview:self.instructionLabel];
     [self.view addSubview:self.input];
+    //[self.view addSubview:self.executeButton];
     [self.view addSubview:underlay];
 }
 
@@ -116,9 +131,11 @@ int i = 0;
     i++;
     [self setContent];
     if (i == 2) {
-        [self.nextButton setEnabled:NO];
+        //[self.nextButton setEnabled:NO];
         [self.nextButton setTitle:@"Done" forState:UIControlStateNormal];
-        // push achievement page
+        CGFinishedViewController *finishedViewController = [[CGFinishedViewController alloc] init];
+        [self.navigationController pushViewController:finishedViewController animated:YES];
+        i = 0;
     }
 
 }
@@ -130,13 +147,6 @@ int i = 0;
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSFontAttributeName:[UIFont fontWithName:@"Montserrat" size:18.0f],
 	                                       NSForegroundColorAttributeName:[UIColor whiteColor] }];
 
-    UIButton *executeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [executeButton setFrame:CGRectMake(0, 0, 30, 30)];
-    [executeButton setTitle:@"\uE801" forState:UIControlStateNormal];
-    [executeButton.titleLabel setFont:[UIFont fontWithName:@"icons" size:25]];
-    [executeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [executeButton addTarget:self action:@selector(executeJS) forControlEvents:UIControlEventTouchUpInside];
-
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
     [closeButton setTitle:@"\uE803" forState:UIControlStateNormal];
@@ -144,8 +154,9 @@ int i = 0;
     [closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(dismissLesson) forControlEvents:UIControlEventTouchUpInside];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:executeButton];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStylePlain target:self action:@selector(executeJS)];
 }
 
 - (void)dismissLesson

@@ -10,4 +10,6 @@
 
 @interface CGLandscapeViewController : UIViewController <UITextViewDelegate>
 
+- (id)initWithChallenge:(NSString *)challengeStr answer:(NSString *)answer;
+
 @end
