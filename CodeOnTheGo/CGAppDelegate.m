@@ -9,6 +9,7 @@
 #import "CGAppDelegate.h"
 
 #import "CGNavigationController.h"
+#import "CGTableViewController.h"
 #import "CGLessonViewController.h"
 #import "CGLaunchViewController.h"
 #import "CGConsoleViewController.h"
@@ -22,6 +23,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     CGLaunchViewController *consoleViewController = [[CGLaunchViewController alloc] init];
+    //CGTableViewController *consoleViewController = [[CGTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     //CGLessonViewController *consoleViewController = [[CGLessonViewController alloc] init];
     self.window.rootViewController = [[CGNavigationController alloc] initWithRootViewController:consoleViewController];
     [self.window makeKeyAndVisible];

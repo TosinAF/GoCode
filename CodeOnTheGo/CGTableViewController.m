@@ -8,25 +8,30 @@
 
 #import "CGTableViewController.h"
 
+static NSString *cellIdentifier = @"CellIdentifier";
+
 @interface CGTableViewController ()
+
+@property (nonatomic, strong) NSArray *data;
 
 @end
 
 @implementation CGTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (UIStatusBarStyle)preferredStatusBarStyle
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setTitle:@"Pick a Lessson"];
+
+    [self configureNavbarApperance];
+
+    self.data = [[NSArray alloc] initWithObjects:@"Getting Started", @"Data Types", @"Variables", @"Comparisons", @"If.. Else...", nil];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
     
 }
 
@@ -48,76 +53,46 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.data count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     
-    // Configure the cell...
-    
+    [cell.textLabel setText:[self.data objectAtIndex:[indexPath row]]];
+
+    UIProgressView *progress = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+    progress.frame = CGRectMake(0, 44, self.view.bounds.size.width, 30);
+    [progress setProgressTintColor:[UIColor colorWithRed:0.204 green:0.286 blue:0.369 alpha:1]];
+
+
+    if ([indexPath row] == 0) {
+        progress.progress = 0.65;
+    }
+
+    if ([indexPath row] % 3 == 1) {
+        [cell.detailTextLabel setText:@"Hard"];
+    } else if ([indexPath row] % 3 == 2) {
+        [cell.detailTextLabel setText:@"Medium"];
+    } else {
+        [cell.detailTextLabel setText:@"Easy"];
+    }
+
+    [cell.textLabel setFont:[UIFont fontWithName:@"Avenir-Medium" size:15.0]];
+    [cell.detailTextLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:10.0]];
+
+    [cell.contentView addSubview:progress];
+
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
