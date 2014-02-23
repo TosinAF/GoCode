@@ -35,6 +35,7 @@
 		4E82122918B99DED00BF06DA /* NLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82122818B99DED00BF06DA /* NLTextView.m */; };
 		4E82122B18B9A0E400BF06DA /* Syntax.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E82122A18B9A0E400BF06DA /* Syntax.plist */; };
 		4E82122E18B9A6EB00BF06DA /* CGTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */; };
+		4E82123118B9CA4400BF06DA /* CGLandscapeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82123018B9CA4400BF06DA /* CGLandscapeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		4E82122A18B9A0E400BF06DA /* Syntax.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Syntax.plist; sourceTree = "<group>"; };
 		4E82122C18B9A6EB00BF06DA /* CGTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGTableViewController.h; sourceTree = "<group>"; };
 		4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGTableViewController.m; sourceTree = "<group>"; };
+		4E82122F18B9CA4400BF06DA /* CGLandscapeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLandscapeViewController.h; sourceTree = "<group>"; };
+		4E82123018B9CA4400BF06DA /* CGLandscapeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGLandscapeViewController.m; sourceTree = "<group>"; };
 		589C62681D454AB29DEBD91D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0456C8E0D054616BDF08548 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +161,8 @@
 				4E82110218B91B1900BF06DA /* CGLaunchViewController.m */,
 				4E82110A18B9334C00BF06DA /* CGLessonViewController.h */,
 				4E82110B18B9334C00BF06DA /* CGLessonViewController.m */,
+				4E82122F18B9CA4400BF06DA /* CGLandscapeViewController.h */,
+				4E82123018B9CA4400BF06DA /* CGLandscapeViewController.m */,
 				4E82122C18B9A6EB00BF06DA /* CGTableViewController.h */,
 				4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */,
 				4E82122718B99DED00BF06DA /* NLTextView.h */,
@@ -352,6 +357,7 @@
 				4E82122918B99DED00BF06DA /* NLTextView.m in Sources */,
 				4E82110F18B9394200BF06DA /* CGNavigationController.m in Sources */,
 				4E82115E18B962FC00BF06DA /* CSNotificationView.m in Sources */,
+				4E82123118B9CA4400BF06DA /* CGLandscapeViewController.m in Sources */,
 				4E8210FE18B8F65A00BF06DA /* CGConsoleViewController.m in Sources */,
 				4E82122E18B9A6EB00BF06DA /* CGTableViewController.m in Sources */,
 				4E8210DE18B8F5D100BF06DA /* CGAppDelegate.m in Sources */,
