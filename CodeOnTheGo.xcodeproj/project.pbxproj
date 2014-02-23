@@ -27,11 +27,14 @@
 		4E82110918B920FC00BF06DA /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82110718B920FC00BF06DA /* Montserrat-Regular.ttf */; };
 		4E82110C18B9334C00BF06DA /* CGLessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82110B18B9334C00BF06DA /* CGLessonViewController.m */; };
 		4E82110F18B9394200BF06DA /* CGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82110E18B9394200BF06DA /* CGNavigationController.m */; };
-		4E82111718B94D5400BF06DA /* icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82111618B94D5400BF06DA /* icons.ttf */; };
 		4E82115318B95E9100BF06DA /* Anonymous Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82114F18B95E9100BF06DA /* Anonymous Pro.ttf */; };
 		4E82115B18B95FBB00BF06DA /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82115A18B95FBB00BF06DA /* SourceSansPro-Regular.otf */; };
 		4E82115E18B962FC00BF06DA /* CSNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82115D18B962FC00BF06DA /* CSNotificationView.m */; };
 		4E82116018B9630600BF06DA /* CSNotificationView.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E82115F18B9630600BF06DA /* CSNotificationView.xcassets */; };
+		4E82122618B99BD700BF06DA /* icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E82122518B99BD700BF06DA /* icons.ttf */; };
+		4E82122918B99DED00BF06DA /* NLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82122818B99DED00BF06DA /* NLTextView.m */; };
+		4E82122B18B9A0E400BF06DA /* Syntax.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E82122A18B9A0E400BF06DA /* Syntax.plist */; };
+		4E82122E18B9A6EB00BF06DA /* CGTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,12 +75,17 @@
 		4E82110B18B9334C00BF06DA /* CGLessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGLessonViewController.m; sourceTree = "<group>"; };
 		4E82110D18B9394200BF06DA /* CGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGNavigationController.h; sourceTree = "<group>"; };
 		4E82110E18B9394200BF06DA /* CGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGNavigationController.m; sourceTree = "<group>"; };
-		4E82111618B94D5400BF06DA /* icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.ttf; sourceTree = "<group>"; };
 		4E82114F18B95E9100BF06DA /* Anonymous Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Anonymous Pro.ttf"; sourceTree = "<group>"; };
 		4E82115A18B95FBB00BF06DA /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
 		4E82115C18B962FC00BF06DA /* CSNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNotificationView.h; sourceTree = "<group>"; };
 		4E82115D18B962FC00BF06DA /* CSNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNotificationView.m; sourceTree = "<group>"; };
 		4E82115F18B9630600BF06DA /* CSNotificationView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CSNotificationView.xcassets; sourceTree = "<group>"; };
+		4E82122518B99BD700BF06DA /* icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.ttf; sourceTree = "<group>"; };
+		4E82122718B99DED00BF06DA /* NLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLTextView.h; sourceTree = "<group>"; };
+		4E82122818B99DED00BF06DA /* NLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLTextView.m; sourceTree = "<group>"; };
+		4E82122A18B9A0E400BF06DA /* Syntax.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Syntax.plist; sourceTree = "<group>"; };
+		4E82122C18B9A6EB00BF06DA /* CGTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGTableViewController.h; sourceTree = "<group>"; };
+		4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGTableViewController.m; sourceTree = "<group>"; };
 		589C62681D454AB29DEBD91D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0456C8E0D054616BDF08548 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,11 +152,15 @@
 		4E8210D318B8F5D100BF06DA /* CodeOnTheGo */ = {
 			isa = PBXGroup;
 			children = (
+				4E8210DC18B8F5D100BF06DA /* CGAppDelegate.h */,
+				4E8210DD18B8F5D100BF06DA /* CGAppDelegate.m */,
+				4E82122718B99DED00BF06DA /* NLTextView.h */,
+				4E82122818B99DED00BF06DA /* NLTextView.m */,
+				4E82122C18B9A6EB00BF06DA /* CGTableViewController.h */,
+				4E82122D18B9A6EB00BF06DA /* CGTableViewController.m */,
 				4E82115C18B962FC00BF06DA /* CSNotificationView.h */,
 				4E82115D18B962FC00BF06DA /* CSNotificationView.m */,
 				4E82115F18B9630600BF06DA /* CSNotificationView.xcassets */,
-				4E8210DC18B8F5D100BF06DA /* CGAppDelegate.h */,
-				4E8210DD18B8F5D100BF06DA /* CGAppDelegate.m */,
 				4E82110D18B9394200BF06DA /* CGNavigationController.h */,
 				4E82110E18B9394200BF06DA /* CGNavigationController.m */,
 				4E82110118B91B1900BF06DA /* CGLaunchViewController.h */,
@@ -166,11 +178,12 @@
 		4E8210D418B8F5D100BF06DA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E82122A18B9A0E400BF06DA /* Syntax.plist */,
+				4E82122518B99BD700BF06DA /* icons.ttf */,
 				4E82115A18B95FBB00BF06DA /* SourceSansPro-Regular.otf */,
 				4E82114F18B95E9100BF06DA /* Anonymous Pro.ttf */,
 				4E8210D518B8F5D100BF06DA /* CodeOnTheGo-Info.plist */,
 				4E8210D618B8F5D100BF06DA /* InfoPlist.strings */,
-				4E82111618B94D5400BF06DA /* icons.ttf */,
 				4E8210D918B8F5D100BF06DA /* main.m */,
 				4E8210DB18B8F5D100BF06DA /* CodeOnTheGo-Prefix.pch */,
 				4E82110618B920FC00BF06DA /* Montserrat-Bold.ttf */,
@@ -276,10 +289,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E82110818B920FC00BF06DA /* Montserrat-Bold.ttf in Resources */,
+				4E82122618B99BD700BF06DA /* icons.ttf in Resources */,
 				4E82115B18B95FBB00BF06DA /* SourceSansPro-Regular.otf in Resources */,
 				4E8210D818B8F5D100BF06DA /* InfoPlist.strings in Resources */,
-				4E82111718B94D5400BF06DA /* icons.ttf in Resources */,
 				4E82115318B95E9100BF06DA /* Anonymous Pro.ttf in Resources */,
+				4E82122B18B9A0E400BF06DA /* Syntax.plist in Resources */,
 				4E8210E018B8F5D100BF06DA /* Images.xcassets in Resources */,
 				4E82110918B920FC00BF06DA /* Montserrat-Regular.ttf in Resources */,
 				4E82116018B9630600BF06DA /* CSNotificationView.xcassets in Resources */,
@@ -335,9 +349,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E82110C18B9334C00BF06DA /* CGLessonViewController.m in Sources */,
+				4E82122918B99DED00BF06DA /* NLTextView.m in Sources */,
 				4E82110F18B9394200BF06DA /* CGNavigationController.m in Sources */,
 				4E82115E18B962FC00BF06DA /* CSNotificationView.m in Sources */,
 				4E8210FE18B8F65A00BF06DA /* CGConsoleViewController.m in Sources */,
+				4E82122E18B9A6EB00BF06DA /* CGTableViewController.m in Sources */,
 				4E8210DE18B8F5D100BF06DA /* CGAppDelegate.m in Sources */,
 				4E8210DA18B8F5D100BF06DA /* main.m in Sources */,
 				4E82110318B91B1900BF06DA /* CGLaunchViewController.m in Sources */,

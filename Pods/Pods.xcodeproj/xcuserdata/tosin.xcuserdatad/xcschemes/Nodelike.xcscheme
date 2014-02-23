@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F88195416D042F8A0C19DE9"
+               BlueprintIdentifier = "ECE7BDE850BE4FA08D8EAD04"
                BuildableName = "Nodelike.bundle"
                BlueprintName = "Nodelike"
                ReferencedContainer = "container:Pods.xcodeproj">

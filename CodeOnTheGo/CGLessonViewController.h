@@ -10,4 +10,8 @@
 
 @interface CGLessonViewController : UIViewController <UITextViewDelegate>
 
+@property (nonatomic, strong) UILabel *instructionLabel;
+@property (nonatomic, strong) NLTextView *input;
+@property (nonatomic, strong) UITextView *output;
+
 @end

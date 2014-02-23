@@ -7,6 +7,7 @@
 //
 
 #import "NLContext.h"
+#import "NLTextView.h"
 #import "CSNotificationView.h"
 #import "CGLessonViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
@@ -14,7 +15,7 @@
 @interface CGLessonViewController ()
 
 @property (nonatomic, strong) UILabel *instructionLabel;
-@property (nonatomic, strong) UITextView *input;
+@property (nonatomic, strong) NLTextView *input;
 @property (nonatomic, strong) UITextView *output;
 @property (nonatomic, strong) JSContext *context;
 @property (nonatomic, strong) NSMutableArray *log;
@@ -28,9 +29,14 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [self.input becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidLoad
@@ -57,10 +63,10 @@
     [self.instructionLabel setBackgroundColor:[UIColor whiteColor]];
     [self.instructionLabel setTextColor:[UIColor blackColor]];
 
-    self.input = [[UITextView alloc] initWithFrame:CGRectMake(0, 140, screenSize.width, 212)];
+    self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 140, screenSize.width, 212) textContainer:nil];
     [self.input setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
-    [self.input setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
-    [self.input setTextColor:[UIColor whiteColor]];
+    //[self.input setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
+    //[self.input setTextColor:[UIColor whiteColor]];
     [self.input setUserInteractionEnabled:YES];
     [self.input setKeyboardAppearance:UIKeyboardAppearanceDark];
     [self.input setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -72,8 +78,12 @@
     [self.output setTextColor:[UIColor whiteColor]];
     [self.output setEditable:NO];
 
+    UIView *underlay = [[UIView alloc] initWithFrame:CGRectMake(0, 352, screenSize.width, 216)];
+    [underlay setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
+
     [self.view addSubview:self.instructionLabel];
     [self.view addSubview:self.input];
+    [self.view addSubview:underlay];
 
 }
 
@@ -91,7 +101,20 @@
     [executeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [executeButton addTarget:self action:@selector(executeJS) forControlEvents:UIControlEventTouchUpInside];
 
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [closeButton setTitle:@"\uE803" forState:UIControlStateNormal];
+    [closeButton.titleLabel setFont:[UIFont fontWithName:@"icons" size:25]];
+    [closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(dismissLesson) forControlEvents:UIControlEventTouchUpInside];
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:executeButton];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+}
+
+- (void)dismissLesson
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupJSInterpreter
@@ -111,31 +134,33 @@
 
     _context[@"console"] = @{@"log": ^(JSValue *thing) {
         [JSContext.currentArguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [weakSelf.log addObject:[obj toObject]];
+            [weakSelf.log addObject:[obj toString]];
         }];
     }};
 }
 
 - (void)executeJS
 {
-    //JSContext *context = [[JSContext alloc] init];
     JSValue *result = [self.context evaluateScript:self.input.text];
-    [NLContext runEventLoop];
+    [NLContext runEventLoopAsync];
+    NSMutableString *output = [[NSMutableString alloc] initWithString:@""];
 
     if (![result isUndefined]) {
         [self output:[result toString]];
     }
+
     if ([self.log count]) {
 
-        [self.output setText:[self.log firstObject]];
-        NSLog(@"%@", self.log);
+        for (NSString *item in self.log) {
+            [output appendString:item];
+            [output appendString:@"\n"];
+        }
+
+        [self.output setText:output];
         [self.log removeAllObjects];
         [self.view addSubview:self.output];
-        //[self resignFirstResponder];
         [self.view endEditing:YES];
     }
-
-
 }
 
 - (void)output:(NSString *)message {

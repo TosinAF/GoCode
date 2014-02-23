@@ -11,6 +11,8 @@
 
 #import "NLContext.h"
 
+#import "NSObject+Nodelike.h"
+
 #import "NLBinding.h"
 
 #import "NLNatives.h"
@@ -35,20 +37,7 @@
     return (NLContext *)[super currentContext];
 }
 
-- (JSValue *)evaluateScript:(NSString *)script {
-    JSValue *val = [super evaluateScript:script];
-    [NLContext runEventLoop];
-    return val;
-}
-
 #pragma mark - Scope Setup
-
-+ (void)runBootstrapJavascript:(JSContext *)context {
-    JSValue *constructor = [context evaluateScript:[NLNatives source:@"nodelike"]];
-    [constructor callWithArguments:@[^(NSString *code) {
-        return [JSContext.currentContext evaluateScript:code];
-    }]];
-}
 
 + (void)attachToContext:(JSContext *)context {
 
@@ -58,51 +47,61 @@
     };
 #endif
     
-    context[@"process"] = @{@"platform": @"darwin",
-                            @"argv":     NSProcessInfo.processInfo.arguments,
-                            @"env":      NSProcessInfo.processInfo.environment,
-                            @"execPath": NSBundle.mainBundle.executablePath,
-                            @"_asyncFlags": @{},
-                            @"moduleLoadList": @[]};
+    JSValue *process = [JSValue valueWithObject:@{
+        @"platform": @"darwin",
+        @"argv":     NSProcessInfo.processInfo.arguments,
+        @"env":      NSProcessInfo.processInfo.environment,
+        @"execPath": NSBundle.mainBundle.executablePath,
+        @"_asyncFlags": @{},
+        @"moduleLoadList": @[]
+    } inContext:context];
     
-    context[@"process"][@"hrtime"] = ^(JSValue *offset) {
-        clock_serv_t cclock;
-        mach_timespec_t mts;
-        host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
-        clock_get_time(cclock, &mts);
-        mach_port_deallocate(mach_task_self(), cclock);
-        unsigned int sec  = mts.tv_sec;
-        unsigned int nsec = mts.tv_nsec;
-        if (!offset.isUndefined) {
-            sec  = [offset valueAtIndex:0].toInt32 - sec;
-            nsec = [offset valueAtIndex:1].toInt32 - nsec;
+    // used in Hrtime() below
+#define NANOS_PER_SEC 1000000000
+
+    // hrtime exposes libuv's uv_hrtime() high-resolution timer.
+    // The value returned by uv_hrtime() is a 64-bit int representing nanoseconds,
+    // so this function instead returns an Array with 2 entries representing seconds
+    // and nanoseconds, to avoid any integer overflow possibility.
+    // Pass in an Array from a previous hrtime() call to instead get a time diff.
+    process[@"hrtime"] = ^(JSValue *offset) {
+        uint64_t t = uv_hrtime();
+        if (!offset.isUndefined && offset.isObject) {
+            // return a time diff tuple
+            uint64_t seconds = [offset valueAtIndex:0].toInt32;
+            uint64_t nanos   = [offset valueAtIndex:1].toInt32;
+            t -= (seconds * NANOS_PER_SEC) + nanos;
         }
-        return @[[NSNumber numberWithUnsignedInt:sec], [NSNumber numberWithUnsignedInt:nsec]];
+        return @[[NSNumber numberWithUnsignedInt:t / NANOS_PER_SEC], [NSNumber numberWithUnsignedInt:t % NANOS_PER_SEC]];
     };
     
-    context[@"process"][@"reallyExit"] = ^(NSNumber *code) {
+    process[@"reallyExit"] = ^(NSNumber *code) {
         exit(code.intValue);
     };
     
-    context[@"process"][@"_kill"] = ^(NSNumber *pid, NSNumber *sig) {
+    process[@"_kill"] = ^(NSNumber *pid, NSNumber *sig) {
         kill(pid.intValue, sig.intValue);
     };
     
-    context[@"process"][@"nextTick"] = ^(JSValue * cb) {
+    process[@"nextTick"] = ^(JSValue * cb) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             [cb callWithArguments:@[]];
         });
     };
     
-    context[@"process"][@"binding"] = ^(NSString *binding) {
+    process[@"binding"] = ^(NSString *binding) {
         return [NLBinding bindingForIdentifier:binding];
     };
     
-    context[@"log"] = ^(id msg) {
-        NSLog(@"%@", msg);
+    context[@"console"] = @{
+        @"log": ^ { NSLog(@"stdio: %@", [JSContext currentArguments]); },
+        @"error": ^{ NSLog(@"stderr: %@", [JSContext currentArguments]); }
     };
     
-    [self runBootstrapJavascript:context];
+    JSValue *constructor = [context evaluateScript:[NLNatives source:@"nodelike"]];
+    [constructor callWithArguments:@[process]];
+    
+    [context.virtualMachine nodelikeSet:&env_process_object toValue:process];
 
     JSValue *noop = [context evaluateScript:@"(function(){})"];
     
@@ -145,7 +144,13 @@
     return queue;
 }
 
-+ (void)runEventLoop {
++ (void)runEventLoopSync {
+    dispatch_sync(NLContext.dispatchQueue, ^{
+        uv_run(NLContext.eventLoop, UV_RUN_DEFAULT);
+    });
+}
+
++ (void)runEventLoopAsync {
     dispatch_async(NLContext.dispatchQueue, ^{
         uv_run(NLContext.eventLoop, UV_RUN_DEFAULT);
     });
