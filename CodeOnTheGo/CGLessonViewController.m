@@ -120,7 +120,7 @@
 {
     //JSContext *context = [[JSContext alloc] init];
     JSValue *result = [self.context evaluateScript:self.input.text];
-    [NLContext runEventLoopSync];
+    [NLContext runEventLoop];
 
     if (![result isUndefined]) {
         [self output:[result toString]];

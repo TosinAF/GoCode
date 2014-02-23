@@ -1,0 +1,1 @@
+PODS_NODELIKE_OTHER_LDFLAGS = -lSystem -framework Foundation -framework JavaScriptCore

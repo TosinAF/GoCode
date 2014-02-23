@@ -70,7 +70,7 @@
     //JSContext *context = [[JSContext alloc] init];
     JSValue *result = [self.context evaluateScript:self.inputView.text];
 
-    [NLContext runEventLoopAsync];
+    [NLContext runEventLoop];
 
     NSLog(@"%@", self.log);
 
