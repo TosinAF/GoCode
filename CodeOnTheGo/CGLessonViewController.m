@@ -127,7 +127,7 @@
     }
     if ([self.log count]) {
 
-        [self.output setText:[self.log firstObject]];
+        [self.output setText:[self.log firstObject].stringValue];
         NSLog(@"%@", self.log);
         [self.log removeAllObjects];
         [self.view addSubview:self.output];
