@@ -20,17 +20,16 @@
 @property (nonatomic, strong) JSContext *context;
 @property (nonatomic, strong) NSMutableArray *log;
 
-@property (nonatomic, strong) UIButton *nextButton;
+@property (nonatomic, strong) UILabel *changeToLandscapeLabel;
 
+@property (nonatomic, strong) UIButton *homeButton;
+@property (nonatomic, strong) UIButton *executeButton;
 
 @end
 
 @implementation CGLandscapeViewController
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -47,58 +46,95 @@
     return YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES];
 }
 
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    UIInterfaceOrientation devOrientation = self.interfaceOrientation;
+
+    if (UIInterfaceOrientationLandscapeLeft == devOrientation || UIInterfaceOrientationLandscapeRight == devOrientation) {
+        if (![self.changeToLandscapeLabel isHidden]) {
+            [self.changeToLandscapeLabel removeFromSuperview];
+            [self.homeButton removeFromSuperview];
+        }
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [self.view addSubview:self.instructionLabel];
+        [self.view addSubview:self.input];
+        [self.view addSubview:self.output];
+        [self.view addSubview:self.executeButton];
+
+    } else {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.changeToLandscapeLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        [self.changeToLandscapeLabel setText:@"Change To Landscape"];
+        [self.changeToLandscapeLabel setTextColor:[UIColor colorWithRed:0.161 green:0.502 blue:0.725 alpha:1]];
+        [self.changeToLandscapeLabel setBackgroundColor:[UIColor whiteColor]];
+        [self.changeToLandscapeLabel setNumberOfLines:0];
+        [self.changeToLandscapeLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.changeToLandscapeLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:40.0]];
+        [self.view addSubview:self.changeToLandscapeLabel];
+
+        self.homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.homeButton setFrame:CGRectMake(10, 30, 30, 30)];
+        [self.homeButton setTitle:@"\uE808" forState:UIControlStateNormal];
+        [self.homeButton.titleLabel setFont:[UIFont fontWithName:@"icons" size:25]];
+        [self.homeButton setTitleColor:[UIColor colorWithRed:0.161 green:0.502 blue:0.725 alpha:1] forState:UIControlStateNormal];
+        [self.homeButton addTarget:self action:@selector(goHome) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.homeButton];
+
+        if (![self.instructionLabel isHidden]) {
+            [self.instructionLabel removeFromSuperview];
+            [self.input resignFirstResponder];
+            [self.input removeFromSuperview];
+            [self.output removeFromSuperview];
+            [self.executeButton removeFromSuperview];
+        }
+    }
+}
+
+- (void)goHome
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGSize screenSize = CGSizeMake(568, 320);
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    CGSize screenSize = self.view.bounds.size;
 
-    [self configureNavbarApperance];
-    //[self setupViews];
+    self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, 30)];
+    self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 30, screenSize.width, 150)];
+    self.output = [[UITextView alloc] initWithFrame:CGRectMake(0, 180, screenSize.width, 150)];
+    [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
 
-    if (([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft) || ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight)) {
+    [self.input setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
+    [self.input setUserInteractionEnabled:YES];
+    [self.input setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [self.input setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [self.input setDelegate:self];
 
-        self.instructionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, screenSize.width - 40, 100)];
-        //[self.instructionLabel setText:@"What is the sound equal after the first if-statement is run?"];
-        [self.instructionLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:16.0]];
-        [self.instructionLabel setNumberOfLines:0];
-        [self.instructionLabel setBackgroundColor:[UIColor whiteColor]];
-        [self.instructionLabel setTextColor:[UIColor blackColor]];
+    [self.output setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
+    [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
+    [self.output setTextColor:[UIColor colorWithRed:0.388 green:0.627 blue:0.424 alpha:1]];
+    [self.output setEditable:NO];
 
-        self.input = [[NLTextView alloc] initWithFrame:CGRectMake(0, 140, screenSize.width, 212) textContainer:nil];
-        [self.input setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
-        //[self.input setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
-        //[self.input setTextColor:[UIColor whiteColor]];
-        [self.input setUserInteractionEnabled:YES];
-        [self.input setKeyboardAppearance:UIKeyboardAppearanceDark];
-        [self.input setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-        [self.input setDelegate:self];
+    self.executeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.executeButton setTitle:@"Run" forState:UIControlStateNormal];
+    [self.executeButton.titleLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:15]];
+    [self.executeButton setBackgroundColor:[UIColor colorWithRed:0.180 green:0.800 blue:0.443 alpha:1]];
+    [self.executeButton setFrame:CGRectMake(490, 40, 70, 35)];
+    [self.executeButton addTarget:self action:@selector(executeJS) forControlEvents:UIControlEventTouchUpInside];
 
-        self.output = [[UITextView alloc] initWithFrame:CGRectMake(0, 352, screenSize.width, 216)];
-        [self.output setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
-        [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
-        [self.output setTextColor:[UIColor whiteColor]];
-        [self.output setEditable:NO];
-
-        UIView *underlay = [[UIView alloc] initWithFrame:CGRectMake(0, 352, screenSize.width, 216)];
-        [underlay setBackgroundColor:[UIColor colorWithRed:0.169 green:0.169 blue:0.169 alpha:1]];
-
-        [self.view addSubview:self.instructionLabel];
-        [self.view addSubview:self.input];
-        [self.view addSubview:underlay];
-    } else {
-        UILabel *changeToLandscapeLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
-        [changeToLandscapeLabel setText:@"Change To Landscaper"];
-        [changeToLandscapeLabel setBackgroundColor:[UIColor grayColor]];
-        [changeToLandscapeLabel setFont:[UIFont fontWithName:@"Avenir-Light" size:40.0]];
-        [self.view addSubview:changeToLandscapeLabel];
-        NSLog(@"Not reached");
-    }
+    [self.view addSubview:self.executeButton];
 
     [self setupJSInterpreter];
 
@@ -106,7 +142,7 @@
 
 - (void)setupViews
 {
-    CGSize screenSize = self.view.bounds.size;
+    //CGSize screenSize = self.view.bounds.size;
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
@@ -174,7 +210,7 @@
 {
     JSValue *result = [self.context evaluateScript:self.input.text];
     [NLContext runEventLoopAsync];
-    //NSMutableString *output = [[NSMutableString alloc] initWithString:@""];
+    NSMutableString *output = [[NSMutableString alloc] initWithString:@""];
 
     if (![result isUndefined]) {
         [self output:[result toString]];
@@ -182,16 +218,14 @@
 
     if ([self.log count]) {
 
-        /*for (NSString *item in self.log) {
-         [output appendString:item];
-         [output appendString:@"\n"];
-         }*/
-        NSMutableString *out = [[NSMutableString alloc] initWithString:[self.log firstObject]];
-        [out appendString:@". Congrats. You got it right. Click on the next button to see even more."];
-        [self.output setText:out];
+        for (NSString *item in self.log) {
+            [output appendString:item];
+            [output appendString:@"\n"];
+         }
+
+        [self.output setText:output];
         [self.log removeAllObjects];
         [self.view addSubview:self.output];
-        [self.view addSubview:self.nextButton];
         [self.view endEditing:YES];
     }
 }
@@ -200,10 +234,11 @@
 {
     if (![self.output isHidden]) {
         [self.output removeFromSuperview];
-        [self.nextButton removeFromSuperview];
     }
     return YES;
 }
+
+- (void)canRotate { };
 
 - (void)output:(NSString *)message {
     [CSNotificationView showInViewController:self

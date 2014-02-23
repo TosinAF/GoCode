@@ -14,6 +14,9 @@
 #import "CGLaunchViewController.h"
 #import "CGConsoleViewController.h"
 #import "CGLandscapeViewController.h"
+#import "CGProfileViewController.h"
+
+
 
 @implementation CGAppDelegate
 
@@ -22,13 +25,26 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    //CGLaunchViewController *consoleViewController = [[CGLaunchViewController alloc] init];
-    //CGTableViewController *consoleViewController = [[CGTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    CGLandscapeViewController *consoleViewController = [[CGLandscapeViewController alloc] init];
-    self.window.rootViewController = [[CGNavigationController alloc] initWithRootViewController:consoleViewController];
+    CGLaunchViewController *consoleViewController = [[CGLaunchViewController alloc] init];
+    //CGLandscapeViewController *consoleViewController = [[CGLandscapeViewController alloc] init];
+    self.navController = [[CGNavigationController alloc] initWithRootViewController:consoleViewController];
+    self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    // Get topmost/visible view controller
+    UIViewController *currentViewController = [self.navController topViewController];
+
+    // Check whether it implements a dummy methods called canRotate
+    if ([currentViewController respondsToSelector:@selector(canRotate)]) {
+        // Unlock landscape view orientations for this view controller
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+
+    // Only allow portrait (standard behaviour)
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

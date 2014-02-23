@@ -7,6 +7,9 @@
 //
 
 #import "CGLaunchViewController.h"
+#import "CGProfileViewController.h"
+#import "CGLandscapeViewController.h"
+#import "CGTableViewController.h"
 #import "CGLessonViewController.h"
 
 @interface CGLaunchViewController ()
@@ -31,6 +34,7 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissProfileView) name:@"dismissProfileView" object:nil];
 
     CGSize screenSize = self.view.bounds.size;
     UIColor *blueColor = [UIColor colorWithRed:0.161 green:0.502 blue:0.725 alpha:1];
@@ -60,11 +64,13 @@
     [[challengeButton titleLabel] setFont:[UIFont fontWithName:@"Montserrat" size:15.0]];
     [challengeButton setFrame:CGRectMake(50, 310, screenSize.width - 50, 50)];
 
+
     UIButton *playgroudButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [playgroudButton setTitle:@"Experiment With JS?" forState:UIControlStateNormal];
     [playgroudButton setBackgroundColor:[UIColor colorWithRed:0.835 green:0.176 blue:0.196 alpha:1]];
     [[playgroudButton titleLabel] setFont:[UIFont fontWithName:@"Montserrat" size:15.0]];
     [playgroudButton setFrame:CGRectMake(50, 390, screenSize.width - 50, 50)];
+    [playgroudButton addTarget:self action:@selector(showPlaygroundView) forControlEvents:UIControlEventTouchUpInside];
 
     UILabel *inspirationalQuote = [[UILabel alloc] initWithFrame:CGRectMake(20, 410, 280, 200)];
     [inspirationalQuote setText:@"The iOS Whatsapp Client has only 10,000 Lines of Code, yet it's worth $19 Billion. Don't you want in on that?"];
@@ -72,20 +78,59 @@
     [inspirationalQuote setTextAlignment:NSTextAlignmentCenter];
     [inspirationalQuote setFont:[UIFont fontWithName:@"Avenir-Light" size:12.0]];
 
+    UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [profileButton setFrame:CGRectMake(10, 30, 30, 30)];
+    [profileButton setTitle:@"\uE809" forState:UIControlStateNormal];
+    [profileButton.titleLabel setFont:[UIFont fontWithName:@"icons" size:25]];
+    [profileButton setTitleColor:[UIColor colorWithRed:0.161 green:0.502 blue:0.725 alpha:1] forState:UIControlStateNormal];
+    [profileButton addTarget:self action:@selector(pushProfile) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:logo];
     [self.view addSubview:appTitle];
     [self.view addSubview:learnButton];
     [self.view addSubview:challengeButton];
     [self.view addSubview:playgroudButton];
     [self.view addSubview:inspirationalQuote];
+    [self.view addSubview:profileButton];
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)showPlaygroundView
+{
+    CGLandscapeViewController *playground = [[CGLandscapeViewController alloc] init];
+    [self.navigationController pushViewController:playground animated:YES];
+}
+
+- (void)dismissProfileView
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showLessonView
 {
-    CGLessonViewController *lessonViewController = [[CGLessonViewController alloc] init];
-    [self.navigationController pushViewController:lessonViewController animated:YES];
+    CGTableViewController *tableViewController = [[CGTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.navigationController pushViewController:tableViewController animated:YES];
 }
 
+- (void)pushProfile
+{
+    CGProfileViewController *profile = [[CGProfileViewController alloc] init];
+    [self.navigationController pushViewController:profile animated:YES];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"dismissProfileView" object:nil];
+}
 
 
 @end

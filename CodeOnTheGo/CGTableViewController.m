@@ -7,6 +7,7 @@
 //
 
 #import "CGTableViewController.h"
+#import "CGLessonViewController.h"
 
 static NSString *cellIdentifier = @"CellIdentifier";
 
@@ -21,6 +22,11 @@ static NSString *cellIdentifier = @"CellIdentifier";
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad
@@ -61,6 +67,12 @@ static NSString *cellIdentifier = @"CellIdentifier";
 {
     // Return the number of rows in the section.
     return [self.data count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGLessonViewController *lessonViewController = [[CGLessonViewController alloc] init];
+    [self.navigationController pushViewController:lessonViewController animated:YES];
 }
 
 

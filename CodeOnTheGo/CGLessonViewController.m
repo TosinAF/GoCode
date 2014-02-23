@@ -94,7 +94,7 @@ int i = 0;
     self.output = [[UITextView alloc] initWithFrame:CGRectMake(0, 352, screenSize.width, 216)];
     [self.output setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
     [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
-    [self.output setTextColor:[UIColor whiteColor]];
+    [self.output setTextColor:[UIColor colorWithRed:0.388 green:0.627 blue:0.424 alpha:1]];
     [self.output setEditable:NO];
 
     self.nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
