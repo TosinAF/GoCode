@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>67AFFB14-74C3-49AF-B821-4ACB93747859</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CodeOnTheGo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9BD1ECF8-C1A2-4F4C-8F20-0E66F40A158E</key>
+		<string>ssh://github.com/TosinAF/GoCode.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CodeOnTheGo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9BD1ECF8-C1A2-4F4C-8F20-0E66F40A158E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/TosinAF/GoCode.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9BD1ECF8-C1A2-4F4C-8F20-0E66F40A158E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9BD1ECF8-C1A2-4F4C-8F20-0E66F40A158E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GoCode</string>
+		</dict>
+	</array>
+</dict>
+</plist>

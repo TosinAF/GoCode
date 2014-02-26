@@ -151,7 +151,7 @@ BOOL challenge = NO;
     [self.input setKeyboardAppearance:UIKeyboardAppearanceDark];
     [self.input setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [self.input setDelegate:self];
-
+    self.input.autocorrectionType = UITextAutocorrectionTypeNo;
     [self.output setFont:[UIFont fontWithName:@"SourceSansPro-Regular" size:17.0]];
     [self.output setBackgroundColor:[UIColor colorWithRed:0.227 green:0.227 blue:0.235 alpha:1]];
     [self.output setTextColor:[UIColor colorWithRed:0.388 green:0.627 blue:0.424 alpha:1]];
@@ -212,6 +212,7 @@ BOOL challenge = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf error:[e toString]];
             NSLog(@"%@ stack: %@", e, [e valueForProperty:@"stack"]);
+
         });
     };
 
@@ -221,6 +222,8 @@ BOOL challenge = NO;
         }];
     }};
 }
+
+
 
 - (void)executeJS
 {
