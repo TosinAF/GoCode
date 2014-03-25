@@ -22,6 +22,6 @@ Where GoCode is different is it lets you learn to code right in the palm of your
 - Get inspired : daily quotes at the bottom of the home screen that will motivate you to get stuck in.
 
 
-Have questions, feedback, would like to collaborate? Reach out to me on Twitter: [@tosinaf](https://twitter.com/tosinaf)
+Have questions, feedback, would like to collaborate? Reach out to me on Twitter: [@tosinaf](https://twitter.com/tosinaf) or [@pizzy213beatz](https://twitter.com/pizzy213beatz)
 
 *PLEASE NOTE THAT THE CODE WAS WRITTEN AT A HACKATHON & Will be rewrritten in due course
