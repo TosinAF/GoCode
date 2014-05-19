@@ -11,6 +11,7 @@ GoCode gets you started by introducing you to the basic concepts of coding. Youâ
 
 Where GoCode is different is it lets you learn to code right in the palm of your hand. Mobile is about to surpass desktop in terms of web traffic, it's only fitting we try to get more people coding through this platform. I honestly believe, executed right, it would be a lot easier to get that friend of yours into coding if all they have to do is download an app.<br>
 
+[Medium Article On the promise of a platform like GoCode](https://medium.com/programming-ideas-tutorial-and-experience/9d04058a5972)
 
 ## Features
 
