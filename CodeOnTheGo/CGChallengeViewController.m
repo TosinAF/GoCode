@@ -38,9 +38,9 @@ static NSString *cellIdentifier = @"CellIdentifier";
 
     [self configureNavbarApperance];
 
-    self.challenges = [[NSArray alloc] initWithObjects:@"How many numbers are divisble by 3 within the range of 1-100?", @"Write a function, calculateAge that takes arguments: birth year, current year. Call with arguements, 1994 & 2016", @"Write a fareheneit to celcius converter. Call with -40F.", nil];
+    self.challenges = [[NSArray alloc] initWithObjects:@"How many numbers are divisble by 3 within the range of 1-100?", @"Write a function, calculateAge that takes arguments: birth year, current year. Call with arguments, 1994 & 2016", @"Write a fahrenheit to celcius converter. Call with -40F.", nil];
 
-    self.titles = [[NSArray alloc] initWithObjects:@"Divisble Numbers", @"Calcualte Ages", @"Farehenheit To Celcius", nil];
+    self.titles = [[NSArray alloc] initWithObjects:@"Divisible Numbers", @"Calculate Ages", @"Fahrenheit To Celcius", nil];
 
     self.answers = [[NSArray alloc] initWithObjects:@"33", @"22", @"-40", nil];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
